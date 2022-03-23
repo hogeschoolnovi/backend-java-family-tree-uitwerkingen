@@ -149,4 +149,27 @@ public class Person {
         return grandChildren;
     }
 
+    public List<Pet> getGrandChildrenPets(Person person){
+        List<Person> grandChildren = new ArrayList<>();
+        List<Pet> pets = new ArrayList<>();
+        if(person.getChildren() != null){
+            for (Person children : person.getChildren()) {
+                if(children.getChildren() != null){
+                    for (Person grandKid : children.getChildren()) {
+                        grandChildren.add(grandKid);
+                    }
+                }
+            }
+            if(grandChildren != null){
+                for (Person grandChild : grandChildren) {
+                    List<Pet> petsOfGrandChild = grandChild.getPets();
+                    for (Pet pet : petsOfGrandChild) {
+                        pets.add(pet);
+                    }
+                }
+            }
+        }
+        return pets;
+    }
+
 }

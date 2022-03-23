@@ -287,4 +287,33 @@ class PersonTest {
 //        Assert
         assertEquals(grandChildren, list);
     }
+
+    @Test
+    void getGrandChildrenPets() {
+//        Arrange
+        List<Pet> pets = new ArrayList<>();
+        Person person1 = new Person("Jay Jay", "Pietersen", 3, "female");
+        Person person4 = new Person("Klaas", "Pietersen",12, "male");
+        Person person2 = new Person("James", "Pietersen", 22, "male");
+        Person person3 = new Person("Jan", "Pietersen", 64, "male");
+        Pet cat1 = new Pet("Minoes", 4,"cats");
+        Pet cat2 = new Pet("Garth", 3, "cats");
+        Pet dog = new Pet("Bello", 6, "dogs");
+        person3.addChildToChildren(person3, person2);
+        person2.addChildToChildren(person2,person1);
+        person2.addChildToChildren(person2, person4);
+        person1.addPet(person1, cat2);
+        person4.addPet(person4, cat1);
+        person4.addPet(person4, dog);
+        pets.add(cat2);
+        pets.add(cat1);
+        pets.add(dog);
+
+//        Act
+        List<Pet> animals = person3.getGrandChildrenPets(person3);
+
+//        Assert
+        assertEquals(pets, animals);
+
+    }
 }
