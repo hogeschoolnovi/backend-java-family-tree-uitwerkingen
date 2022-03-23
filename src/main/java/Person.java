@@ -10,6 +10,7 @@ public class Person {
     private String sex;
     private Person mother;
     private Person father;
+    private Person partner;
     private List<Person> siblings;
     private List<Person> children;
     private List<Pet> pets;
@@ -57,6 +58,10 @@ public class Person {
         return father;
     }
 
+    public Person getPartner() {
+        return partner;
+    }
+
     public List<Person> getSiblings() {
         return this.siblings;
     }
@@ -83,6 +88,10 @@ public class Person {
 
     public void setFather(Person father) {
         this.father = father;
+    }
+
+    public void setPartner(Person partner) {
+        this.partner = partner;
     }
 
     public void setSiblings(List<Person> siblings) {
@@ -172,4 +181,26 @@ public class Person {
         return pets;
     }
 
+    public List<Person> getNieces(Person person){
+        List<Person> nieces = new ArrayList<>();
+        List<Person> siblings = person.getSiblings();
+        if(siblings != null){
+            for (Person sibling : siblings) {
+                List<Person> niecesAndNephews = sibling.getChildren();
+                for (Person child : niecesAndNephews) {
+                    if (child.getSex().equalsIgnoreCase("female")){
+                        nieces.add(child);
+                    }
+                }
+            }
+        }
+        return nieces;
+    }
+
+    public void addParntner(Person person, Person partner){
+        if(person.getPartner() == null && partner.getPartner() == null){
+            person.setPartner(partner);
+            partner.setPartner(person);
+        }
+    }
 }

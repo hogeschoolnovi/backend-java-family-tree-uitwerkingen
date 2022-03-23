@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonTest {
 
     @Test
-    void getName() {
+    void getNameTest() {
 //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
 
@@ -20,7 +20,7 @@ class PersonTest {
     }
 
     @Test
-    void getMiddleName() {
+    void getMiddleNameTest() {
         //        Arrange
         Person person1 = new Person("Piet","van der" ,"Pietersen", 34, "non-binear");
 
@@ -32,7 +32,7 @@ class PersonTest {
     }
 
     @Test
-    void getLastname() {
+    void getLastnameTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
 
@@ -44,7 +44,7 @@ class PersonTest {
     }
 
     @Test
-    void getAge() {
+    void getAgeTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
 
@@ -56,7 +56,7 @@ class PersonTest {
     }
 
     @Test
-    void getSex() {
+    void getSexTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
 
@@ -68,7 +68,7 @@ class PersonTest {
     }
 
     @Test
-    void getMother() {
+    void getMotherTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Hannah", "van der", "Plassen", 62, "female");
@@ -82,7 +82,7 @@ class PersonTest {
     }
 
     @Test
-    void getFather() {
+    void getFatherTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
@@ -96,7 +96,7 @@ class PersonTest {
     }
 
     @Test
-    void getSiblings() {
+    void getSiblingsTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
@@ -114,7 +114,7 @@ class PersonTest {
     }
 
     @Test
-    void getChildren() {
+    void getChildrenTest() {
         //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
@@ -134,7 +134,7 @@ class PersonTest {
     }
 
     @Test
-    void getPets() {
+    void getPetsTest() {
 //        Arrange
         Person person1 = new Person("Jan", "Pietersen", 64, "male");
         Pet dog = new Pet("Pluto", 5, "dogs");
@@ -153,7 +153,7 @@ class PersonTest {
     }
 
     @Test
-    void setAge() {
+    void setAgeTest() {
 //        Arrange
         Person person1 = new Person("Jan", "Pietersen", 64, "male");
 
@@ -167,7 +167,7 @@ class PersonTest {
     }
 
     @Test
-    void setSex() {
+    void setSexTest() {
 //        Arrange
         Person person1 = new Person("Jan", "Pietersen", 64, "male");
 
@@ -180,7 +180,7 @@ class PersonTest {
     }
 
     @Test
-    void addParents() {
+    void addParentsTest() {
 //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
@@ -198,7 +198,7 @@ class PersonTest {
     }
 
     @Test
-    void addChildToChildren() {
+    void addChildToChildrenTest() {
 //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
@@ -214,7 +214,7 @@ class PersonTest {
     }
 
     @Test
-    void addChildToExistingChildren() {
+    void addChildToExistingChildrenTest() {
 //        Arrange
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
@@ -235,7 +235,7 @@ class PersonTest {
         assertEquals(children, kids);
     }
     @Test
-    void addPet() {
+    void addPetTest() {
 //        Arrange
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
         Pet dog = new Pet("Luna", 3, "dogs");
@@ -253,7 +253,7 @@ class PersonTest {
     }
 
     @Test
-    void addSibling() {
+    void addSiblingTest() {
 //        Arrange
         List<Person> sibblings = new ArrayList<>();
         Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
@@ -271,7 +271,7 @@ class PersonTest {
     }
 
     @Test
-    void getGrandChildren() {
+    void getGrandChildrenTest() {
 //        Arrange
         List<Person> grandChildren = new ArrayList<>();
         Person person1 = new Person("Jay Jay", "Pietersen", 3, "female");
@@ -289,7 +289,7 @@ class PersonTest {
     }
 
     @Test
-    void getGrandChildrenPets() {
+    void getGrandChildrenPetsTest() {
 //        Arrange
         List<Pet> pets = new ArrayList<>();
         Person person1 = new Person("Jay Jay", "Pietersen", 3, "female");
@@ -315,5 +315,40 @@ class PersonTest {
 //        Assert
         assertEquals(pets, animals);
 
+    }
+
+    @Test
+    void getNiecesTest() {
+//        Arrange
+        List<Person> nieces = new ArrayList<>();
+        Person person1 = new Person("Jay Jay", "Pietersen", 3, "female");
+        Person person4 = new Person("Marie", "Pietersen",12, "female");
+        Person person2 = new Person("James", "Pietersen", 22, "male");
+        Person person3 = new Person("Piet", "Pietersen", 30, "male");
+        person3.addSibling(person3, person2);
+        person2.addChildToChildren(person2, person1);
+        person2.addChildToChildren(person2, person4);
+        nieces.add(person1);
+        nieces.add(person4);
+
+//        Act
+        List<Person> girls = person3.getNieces(person3);
+
+//        Assert
+        assertEquals(nieces, girls);
+    }
+
+    @Test
+    void addParntnerTest() {
+//        Arrange
+        Person person2 = new Person("Jan", "Pietersen", 64, "male");
+        Person person3 = new Person("Hannah", "van der", "Plassen", 62, "female");
+
+//        Act
+        person2.addParntner(person2, person3);
+
+//        Assert
+        assertEquals(person2.getPartner(), person3);
+        assertEquals(person3.getPartner(), person2);
     }
 }
