@@ -10,7 +10,7 @@ class PersonTest {
     @Test
     void getName() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
         String name = person1.getName();
@@ -22,7 +22,7 @@ class PersonTest {
     @Test
     void getMiddleName() {
         //        Arrange
-        Person person1 = new Person("Piet","van der" ,"Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet","van der" ,"Pietersen", 34, "non-binair");
 
 //        Act
         String name = person1.getMiddleName();
@@ -34,7 +34,7 @@ class PersonTest {
     @Test
     void getLastname() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
         String name = person1.getLastname();
@@ -46,7 +46,7 @@ class PersonTest {
     @Test
     void getAge() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
         int age = person1.getAge();
@@ -58,7 +58,7 @@ class PersonTest {
     @Test
     void getSex() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
         String sex = person1.getSex();
@@ -70,7 +70,7 @@ class PersonTest {
     @Test
     void getMother() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Hannah", "van der", "Plassen", 62, "female");
         person1.setMother(person2);
 
@@ -84,7 +84,7 @@ class PersonTest {
     @Test
     void getFather() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
         person1.setFather(person2);
 
@@ -116,7 +116,7 @@ class PersonTest {
     @Test
     void getChildren() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
         Person person3 = new Person("James", "Pietersen", 27, "male");
         Person father = new Person("Jan", "Pietersen", 64, "male");
@@ -182,7 +182,7 @@ class PersonTest {
     @Test
     void addParents() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
         Person person3 = new Person("Hannah", "van der", "Plassen", 62, "female");
 
@@ -200,7 +200,7 @@ class PersonTest {
     @Test
     void addChildToChildren() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jan", "Pietersen", 64, "male");
         List<Person> children = new ArrayList<>();
         children.add(person1);
@@ -216,7 +216,7 @@ class PersonTest {
     @Test
     void addChildToExistingChildren() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
         Person person3 = new Person("James", "Pietersen", 27, "male");
         Person person4 = new Person("Jan", "Pietersen", 64, "male");
@@ -256,7 +256,7 @@ class PersonTest {
     void addSibling() {
 //        Arrange
         List<Person> sibblings = new ArrayList<>();
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
+        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
         Person person2 = new Person("Jade", "Pietersen", 22, "female");
         Person person3 = new Person("Marie", "Pietersen", 22, "female");
         sibblings.add(person3);
