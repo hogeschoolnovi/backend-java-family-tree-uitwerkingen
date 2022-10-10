@@ -64,7 +64,7 @@ class PersonTest {
         String sex = person1.getSex();
 
 //        Assert
-        assertEquals("non-binear", sex);
+        assertEquals("non-binair", sex);
     }
 
     @Test
