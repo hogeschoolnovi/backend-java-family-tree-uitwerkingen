@@ -57,7 +57,7 @@ class PetTest {
     @Test
     public void setOwnerTest(){
 //        Arrange
-        Person mike = new Person("Mike", "van", "Dalen", 23, "male");
+        Person mike = new Person("Mike", "van", "Dalen", 23,  Person.BiologicalGender.Male);
         Pet cat = new Pet("Minoes", 3, "cat");
 
 //        Act
