@@ -11,7 +11,7 @@ class PersonTest {
     String person1Name = "Piet";
     String person1LastName = "Pietersen";
     String person1MiddleName = "van der";
-    Person.BiologicalGender person1Gender = Person.BiologicalGender.Male;
+    BiologicalGender person1Gender = BiologicalGender.Male;
     int person1Age = 34;
     Person person2;
     Person person3;
@@ -19,8 +19,8 @@ class PersonTest {
     @BeforeEach
     void SetInitialState() {
         person1 = new Person(person1Name, person1MiddleName, person1LastName, person1Age, person1Gender);
-        person2 = new Person("Jade", "Pietersen", 22, Person.BiologicalGender.Female);
-        person3 = new Person("James", "Pietersen", 3, Person.BiologicalGender.Male);
+        person2 = new Person("Jade", "Pietersen", 22, BiologicalGender.Female);
+        person3 = new Person("James", "Pietersen", 3, BiologicalGender.Male);
     }
 
     @Test
@@ -69,7 +69,7 @@ class PersonTest {
         //        Arrange
 
 //        Act
-        Person.BiologicalGender gender = person1.getBiologicalGender();
+        BiologicalGender gender = person1.getBiologicalGender();
 
 //        Assert
         assertEquals(person1Gender, gender);
@@ -78,7 +78,7 @@ class PersonTest {
     @Test
     void getMother() {
         //        Arrange
-        Person motherPerson = new Person("Jannie", "Pietersen", 64, Person.BiologicalGender.Female);
+        Person motherPerson = new Person("Jannie", "Pietersen", 64, BiologicalGender.Female);
         person1.setMother(motherPerson);
 
 //        Act
@@ -91,7 +91,7 @@ class PersonTest {
     @Test
     void getFather() {
         //        Arrange
-        Person fatherPerson = new Person("Jan", "Pietersen", 64, Person.BiologicalGender.Male);
+        Person fatherPerson = new Person("Jan", "Pietersen", 64, BiologicalGender.Male);
         person1.setFather(fatherPerson);
 //        Act
         Person father = person1.getFather();
@@ -118,9 +118,9 @@ class PersonTest {
     @Test
     void getChildren() {
         //        Arrange
-        Person child1 = new Person("Piet", "Pietersen", 34, Person.BiologicalGender.Male);
-        Person child2 = new Person("Jade", "Pietersen", 22, Person.BiologicalGender.Female);
-        Person child3 = new Person("James", "Pietersen", 27, Person.BiologicalGender.Male);
+        Person child1 = new Person("Piet", "Pietersen", 34, BiologicalGender.Male);
+        Person child2 = new Person("Jade", "Pietersen", 22, BiologicalGender.Female);
+        Person child3 = new Person("James", "Pietersen", 27, BiologicalGender.Male);
 
         List<Person> kids = new ArrayList<>();
         kids.add(child1);
@@ -169,11 +169,11 @@ class PersonTest {
 //        Arrange
 
 //        Act
-        person1.setBiologicalGender(Person.BiologicalGender.Female);
-        Person.BiologicalGender gender = person1.getBiologicalGender();
+        person1.setBiologicalGender(BiologicalGender.Female);
+        BiologicalGender gender = person1.getBiologicalGender();
 
 //        Assert
-        assertEquals(Person.BiologicalGender.Female, gender);
+        assertEquals(BiologicalGender.Female, gender);
     }
 
     @Test
@@ -194,7 +194,7 @@ class PersonTest {
     @Test
     void addChildToChildren() {
 //        Arrange
-        Person grandChild = new Person("Jamie",person1LastName, 1, Person.BiologicalGender.Male);
+        Person grandChild = new Person("Jamie",person1LastName, 1, BiologicalGender.Male);
 //        Act
         person1.addChild(person2);
         person2.addChild(grandChild);

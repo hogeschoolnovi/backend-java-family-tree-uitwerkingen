@@ -4,14 +4,11 @@ import java.util.List;
 
 public class Person {
 
-    enum BiologicalGender {
-        Male,
-        Female
-    }
 
-    private String name;
-    private String middleName;
-    private String lastname;
+
+    private final String name;
+    private String middleName = "";
+    private final String lastname;
     private int age;
     private BiologicalGender biologicalGender;
     private Person mother;

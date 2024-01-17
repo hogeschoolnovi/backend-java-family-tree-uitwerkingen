@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class PetTest {
 
@@ -52,12 +52,12 @@ class PetTest {
         Person owner = cat.getOwner();
 
 //        Assert
-        assertEquals(null, owner);
+        assertNull(owner);
     }
     @Test
     public void setOwnerTest(){
 //        Arrange
-        Person mike = new Person("Mike", "van", "Dalen", 23,  Person.BiologicalGender.Male);
+        Person mike = new Person("Mike", "van", "Dalen", 23,  BiologicalGender.Male);
         Pet cat = new Pet("Minoes", 3, "cat");
 
 //        Act
