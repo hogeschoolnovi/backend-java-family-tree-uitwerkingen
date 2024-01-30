@@ -1,32 +1,34 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Person {
 
-    private String name;
-    private String middleName;
-    private String lastname;
+
+
+    private final String name;
+    private String middleName = "";
+    private final String lastname;
     private int age;
-    private String sex;
+    private BiologicalGender biologicalGender;
     private Person mother;
     private Person father;
-    private List<Person> siblings;
-    private List<Person> children;
+    private List<Person> children = new ArrayList<>();
     private List<Pet> pets;
 
-    public Person(String name, String lastname, int age, String sex) {
+    public Person(String name, String lastname, int age, BiologicalGender biologicalGender) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
-        this.sex = sex;
+        this.biologicalGender = biologicalGender;
     }
 
-    public Person(String name, String middleName, String lastname, int age, String sex) {
+    public Person(String name, String middleName, String lastname, int age, BiologicalGender biologicalGender) {
         this.name = name;
         this.middleName = middleName;
         this.lastname = lastname;
         this.age = age;
-        this.sex = sex;
+        this.biologicalGender = biologicalGender;
     }
 
     public String getName() {
@@ -45,8 +47,8 @@ public class Person {
         return age;
     }
 
-    public String getSex() {
-        return sex;
+    public BiologicalGender getBiologicalGender() {
+        return biologicalGender;
     }
 
     public Person getMother() {
@@ -58,7 +60,19 @@ public class Person {
     }
 
     public List<Person> getSiblings() {
-        return this.siblings;
+        return findSiblings();
+    }
+
+    private List<Person> findSiblings() {
+        var siblings = new HashSet<Person>();
+        if (mother != null) {
+            siblings.addAll(mother.getChildren());
+        }
+        if (father != null) {
+            siblings.addAll(father.getChildren());
+        }
+        siblings.remove(this); // remove this person because this person should ot be in the list of siblings
+        return siblings.stream().toList();
     }
 
     public List<Person> getChildren() {
@@ -73,8 +87,8 @@ public class Person {
         this.age = age;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setBiologicalGender(BiologicalGender biologicalGender) {
+        this.biologicalGender = biologicalGender;
     }
 
     public void setMother(Person mother) {
@@ -85,34 +99,39 @@ public class Person {
         this.father = father;
     }
 
-    public void setSiblings(List<Person> siblings) {
-        this.siblings = siblings;
-    }
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
 
     public void setChildren(List<Person> children) {
-        this.children = children;
-    }
-
-    public void addParents(Person father, Person mother, Person child){
-        child.setMother(mother);
-        mother.addChildToChildren(mother, child);
-        child.setFather(father);
-        father.addChildToChildren(father, child);
-    }
-
-    public void addChildToChildren(Person parent, Person child){
-        List<Person> kids = new ArrayList<>();
-        if(parent.getChildren()!= null) {
-            for (Person person : parent.getChildren()) {
-                kids.add(person);
-            }
+        if(children == null) {
+            throw new IllegalArgumentException("children cannot be null");
         }
-        kids.add(child);
-        parent.setChildren(kids);
+        this.children = new ArrayList<>();
+        for (Person child: children) {
+            addChild(child);
+        }
+    }
+
+    public void addParents(Person father, Person mother){
+        setMother(mother);
+        mother.addChild(this);
+        setFather(father);
+        father.addChild(this);
+    }
+
+    public void addChild(Person child){
+       if(!getChildren().contains(child))
+       {
+           getChildren().add(child);
+       }
+       if(biologicalGender == BiologicalGender.Male ){
+            child.setFather(this);
+       }
+       if(biologicalGender == BiologicalGender.Female ){
+            child.setMother(this);
+       }
     }
 
     public void addPet(Person person, Pet pet){
@@ -124,29 +143,11 @@ public class Person {
         person.setPets(pets);
     }
 
-    public void addSibling(Person person, Person sibling){
-        List<Person> family = new ArrayList<>();
-        if(person.getSiblings() != null){
-            for (Person people : person.getSiblings()) {
-                family.add(people);
-            }
-        }
-        family.add(sibling);
-        person.setSiblings(family);
-    }
-
-    public List<Person> getGrandChildren(Person person){
+    public List<Person> getGrandChildren(){
         List<Person> grandChildren = new ArrayList<>();
-        if(person.getChildren() != null){
-            for (Person children : person.getChildren()) {
-                if(children.getChildren() != null){
-                    for (Person grandKid : children.getChildren()) {
-                        grandChildren.add(grandKid);
-                    }
-                }
+            for (Person children : getChildren()) {
+                grandChildren.addAll(children.getChildren());
             }
-        }
         return grandChildren;
     }
-
 }

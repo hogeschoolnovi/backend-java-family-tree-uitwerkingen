@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -6,128 +7,129 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
+    Person person1;
+    String person1Name = "Piet";
+    String person1LastName = "Pietersen";
+    String person1MiddleName = "van der";
+    BiologicalGender person1Gender = BiologicalGender.Male;
+    int person1Age = 34;
+    Person person2;
+    Person person3;
+
+    @BeforeEach
+    void SetInitialState() {
+        person1 = new Person(person1Name, person1MiddleName, person1LastName, person1Age, person1Gender);
+        person2 = new Person("Jade", "Pietersen", 22, BiologicalGender.Female);
+        person3 = new Person("James", "Pietersen", 3, BiologicalGender.Male);
+    }
 
     @Test
     void getName() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-
 //        Act
         String name = person1.getName();
-
 //        Assert
-        assertEquals("Piet", name);
+        assertEquals(person1Name, name);
     }
 
     @Test
     void getMiddleName() {
         //        Arrange
-        Person person1 = new Person("Piet","van der" ,"Pietersen", 34, "non-binair");
-
 //        Act
         String name = person1.getMiddleName();
 
 //        Assert
-        assertEquals("van der", name);
+        assertEquals(person1MiddleName, name);
     }
 
     @Test
     void getLastname() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
-//        Act
+        //        Act
         String name = person1.getLastname();
 
-//        Assert
-        assertEquals("Pietersen", name);
+        //        Assert
+        assertEquals(person1LastName, name);
     }
 
     @Test
     void getAge() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
         int age = person1.getAge();
 
 //        Assert
-        assertEquals(34, age);
+        assertEquals(person1Age, age);
     }
 
     @Test
-    void getSex() {
+    void getGender() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
 
 //        Act
-        String sex = person1.getSex();
+        BiologicalGender gender = person1.getBiologicalGender();
 
 //        Assert
-        assertEquals("non-binair", sex);
+        assertEquals(person1Gender, gender);
     }
 
     @Test
     void getMother() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Hannah", "van der", "Plassen", 62, "female");
-        person1.setMother(person2);
+        Person motherPerson = new Person("Jannie", "Pietersen", 64, BiologicalGender.Female);
+        person1.setMother(motherPerson);
 
 //        Act
         Person mother = person1.getMother();
 
 //        Assert
-        assertEquals(person2, mother);
+        assertEquals(motherPerson, mother);
     }
 
     @Test
     void getFather() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jan", "Pietersen", 64, "male");
-        person1.setFather(person2);
-
+        Person fatherPerson = new Person("Jan", "Pietersen", 64, BiologicalGender.Male);
+        person1.setFather(fatherPerson);
 //        Act
         Person father = person1.getFather();
 
 //        Assert
-        assertEquals(person2, father);
+        assertEquals(fatherPerson, father);
     }
 
     @Test
     void getSiblings() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binear");
-        Person person2 = new Person("Jade", "Pietersen", 22, "female");
-        Person person3 = new Person("James", "Pietersen", 27, "male");
+
         List<Person> kids = new ArrayList<>();
         kids.add(person2);
         kids.add(person3);
-        person1.setSiblings(kids);
-
+        person1.setChildren(kids);
 //        Act
-        List<Person> siblings = person1.getSiblings();
+        List<Person> siblings = person2.getSiblings();
 
 //        Assert
-        assertEquals(kids, siblings);
+        assertTrue(siblings.contains(person3));
     }
 
     @Test
     void getChildren() {
         //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jade", "Pietersen", 22, "female");
-        Person person3 = new Person("James", "Pietersen", 27, "male");
-        Person father = new Person("Jan", "Pietersen", 64, "male");
+        Person child1 = new Person("Piet", "Pietersen", 34, BiologicalGender.Male);
+        Person child2 = new Person("Jade", "Pietersen", 22, BiologicalGender.Female);
+        Person child3 = new Person("James", "Pietersen", 27, BiologicalGender.Male);
+
         List<Person> kids = new ArrayList<>();
-        kids.add(person2);
-        kids.add(person3);
-        kids.add(person1);
-        father.setChildren(kids);
+        kids.add(child1);
+        kids.add(child2);
+        kids.add(child3);
+        person1.setChildren(kids);
 
 //        Act
-        List<Person> children = father.getChildren();
+        List<Person> children = person1.getChildren();
 
 //        Assert
         assertEquals(kids, children);
@@ -136,7 +138,6 @@ class PersonTest {
     @Test
     void getPets() {
 //        Arrange
-        Person person1 = new Person("Jan", "Pietersen", 64, "male");
         Pet dog = new Pet("Pluto", 5, "dogs");
         Pet cat = new Pet("Kitty", 2, "cats");
         List<Pet> pets = new ArrayList<>();
@@ -155,89 +156,56 @@ class PersonTest {
     @Test
     void setAge() {
 //        Arrange
-        Person person1 = new Person("Jan", "Pietersen", 64, "male");
-
 //        Act
         person1.setAge(65);
         int age = person1.getAge();
-
 //        Assert
         assertEquals(65, age);
 
     }
 
     @Test
-    void setSex() {
+    void setGender() {
 //        Arrange
-        Person person1 = new Person("Jan", "Pietersen", 64, "male");
 
 //        Act
-        person1.setSex("female");
-        String sex = person1.getSex();
+        person1.setBiologicalGender(BiologicalGender.Female);
+        BiologicalGender gender = person1.getBiologicalGender();
 
 //        Assert
-        assertEquals("female", sex);
+        assertEquals(BiologicalGender.Female, gender);
     }
 
     @Test
     void addParents() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jan", "Pietersen", 64, "male");
-        Person person3 = new Person("Hannah", "van der", "Plassen", 62, "female");
 
 //        Act
-        person1.addParents(person2, person3, person1);
-        Person mother = person1.getMother();
-        Person father = person1.getFather();
+        person3.addParents(person1, person2);
+        Person mother = person3.getMother();
+        Person father = person3.getFather();
 
 //        Assert
-        assertEquals(person2, father);
-        assertEquals(person3, mother);
+        assertEquals(person1, father);
+        assertEquals(person2, mother);
 
     }
 
     @Test
     void addChildToChildren() {
 //        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jan", "Pietersen", 64, "male");
-        List<Person> children = new ArrayList<>();
-        children.add(person1);
-
+        Person grandChild = new Person("Jamie",person1LastName, 1, BiologicalGender.Male);
 //        Act
-        person2.addChildToChildren(person2, person1);
-        List<Person> kids = person2.getChildren();
+        person1.addChild(person2);
+        person2.addChild(grandChild);
 
 //        Assert
-        assertEquals(children, kids);
+        assertTrue(person1.getGrandChildren().contains(grandChild));
     }
 
-    @Test
-    void addChildToExistingChildren() {
-//        Arrange
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jade", "Pietersen", 22, "female");
-        Person person3 = new Person("James", "Pietersen", 27, "male");
-        Person person4 = new Person("Jan", "Pietersen", 64, "male");
-        List<Person> children = new ArrayList<>();
-        children.add(person1);
-        children.add(person2);
-        children.add(person3);
-        person4.addChildToChildren(person4,person1);
-        person4.addChildToChildren(person4,person2);
-
-//        Act
-        person4.addChildToChildren(person4, person3);
-        List<Person> kids = person4.getChildren();
-
-//        Assert
-        assertEquals(children, kids);
-    }
     @Test
     void addPet() {
 //        Arrange
-        Person person2 = new Person("Jan", "Pietersen", 64, "male");
         Pet dog = new Pet("Luna", 3, "dogs");
         Pet cat = new Pet("Minoes", 4, "cats");
         List<Pet> pets = new ArrayList<>();
@@ -246,45 +214,9 @@ class PersonTest {
         person2.addPet(person2, cat);
 
 //        Act
-        person2.addPet(person2,dog);
+        person2.addPet(person2, dog);
 
 //        Assert
         assertEquals(pets, person2.getPets());
-    }
-
-    @Test
-    void addSibling() {
-//        Arrange
-        List<Person> sibblings = new ArrayList<>();
-        Person person1 = new Person("Piet", "Pietersen", 34, "non-binair");
-        Person person2 = new Person("Jade", "Pietersen", 22, "female");
-        Person person3 = new Person("Marie", "Pietersen", 22, "female");
-        sibblings.add(person3);
-        sibblings.add(person2);
-        person1.addSibling(person1, person3);
-
-//        Act
-        person1.addSibling(person1, person2);
-
-//        Assert
-        assertEquals(sibblings, person1.getSiblings());
-    }
-
-    @Test
-    void getGrandChildren() {
-//        Arrange
-        List<Person> grandChildren = new ArrayList<>();
-        Person person1 = new Person("Jay Jay", "Pietersen", 3, "female");
-        Person person2 = new Person("James", "Pietersen", 22, "male");
-        Person person3 = new Person("Jan", "Pietersen", 64, "male");
-        grandChildren.add(person1);
-
-//        Act
-        person2.addChildToChildren(person2, person1);
-        person3.addChildToChildren(person3, person2);
-        List<Person> list = person3.getGrandChildren(person3);
-
-//        Assert
-        assertEquals(grandChildren, list);
     }
 }
