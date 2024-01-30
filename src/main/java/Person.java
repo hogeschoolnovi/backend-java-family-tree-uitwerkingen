@@ -111,7 +111,10 @@ public class Person {
         if(children == null) {
                 return;
         }
-        this.children.addAll(children);
+        this.children = new ArrayList<>();
+        for (Person child: children) {
+            addChild(child);
+        }
     }
 
     public void addParents(Person father, Person mother){

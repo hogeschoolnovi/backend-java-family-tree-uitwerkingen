@@ -103,7 +103,6 @@ class PersonTest {
     @Test
     void getSiblings() {
         //        Arrange
-
         List<Person> kids = new ArrayList<>();
         kids.add(person2);
         kids.add(person3);
