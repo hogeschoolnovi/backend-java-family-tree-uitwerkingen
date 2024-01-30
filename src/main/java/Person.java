@@ -71,8 +71,10 @@ public class Person {
         if (father != null) {
             siblings.addAll(father.getChildren());
         }
-        siblings.remove(this); // remove this person because this person should ot be in the list of siblings
-        return siblings.stream().toList();
+        siblings.remove(this); // Deze persoon is geen sibling van zichzelf, dus verwijder deze persoon uit de siblings lijst.
+
+        List<Person> siblingsList = new ArrayList<>(siblings);
+        return siblingsList;
     }
 
     public List<Person> getChildren() {
@@ -105,13 +107,11 @@ public class Person {
     }
 
     public void setChildren(List<Person> children) {
-        if(children == null) {
-            throw new IllegalArgumentException("children cannot be null");
-        }
         this.children = new ArrayList<>();
-        for (Person child: children) {
-            addChild(child);
+        if(children == null) {
+                return;
         }
+        this.children.addAll(children);
     }
 
     public void addParents(Person father, Person mother){
